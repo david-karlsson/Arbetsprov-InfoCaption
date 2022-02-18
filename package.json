@@ -10,7 +10,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "v-pagination-3": "^0.1.7",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

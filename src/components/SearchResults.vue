@@ -21,8 +21,8 @@
 
  
 
-    <ul >
-      <li v-for="item in searchResults[0]" :key="item.id" class="search-item ui card">
+    <ul  id="search-results">
+      <li v-for="item in searchResults[0]" :key="item.id"  class="search-item ui card">
         <span class="author-field">
           <p>{{ item.FirstLastName }}</p>
           <p>({{ item.authorEmail }})</p>
@@ -30,25 +30,26 @@
 
         <h2>{{ item.name }}</h2>
         <span>
-          <img :src=item.thumbnailURL alt="">
+          <img :src=imgadress+item.thumbnailURL alt="">
 
           <p>{{ item.summary }}</p>
          
           <p> <em class="topics" v-for="i in item.topicNames" :key="i"> {{ i }}</em></p>
         </span>
 
-        <footer>
+        <footer class="search-item-footer">
           <p class="date-field">
             <small> {{ item.publicationDate }}</small>
           </p>
+         <a :href=item.fullURL><i class="share alternate icon"></i></a> 
         </footer>
       </li>
     </ul>
     <footer id="pagination-footer" class="container">
-      <button class="ui button" @click="PageTurner(0), Search()">  <i class="left chevron icon divider"></i></button>
+      <button class="ui button" @click="(event) => {PageTurner(0),Search()}">  <i class="left chevron icon divider"></i></button>
       <span class="pagination">
         <div v-for="item in currentPagingArray[0]" :key="item">
-          <button class="ui button" @click="Search(), PaginationList()">
+          <button  :id="item" :value="item" class="ui button" @click="Search(), PaginationList()">
             {{ item }}
           </button>
         </div>
@@ -56,30 +57,36 @@
       <button class="ui button" @click="PageTurner(1), Search()"><i class="right chevron icon divider"></i></button>
 
 
-<!-- <pagination v-model="totPagesArr" :records="totalPages" :per-page="15" /> -->
-
-
+<!-- <pagination v-model="pageNr" :records="totalPages" :per-page="15" /> -->
+  <!-- <pagination
+      :totalPages="10"
+      :perPage="10"
+      :currentPage="currentPage"
+      @pagechanged="onPageChange"
+    /> -->
     </footer>
   </section>
 </template>
 
 <script>
 
+// import Pagination from './Pagination.vue';
+
+
 // import Pagination from 'v-pagination-3';
 
 export default {
   name: "SearchResults",
-  props: {},
 
 
 // components: {
-//   Pagination
+//   Pagination,
 // },
   data() {
     return {
       searchQuery: "",
       searchResults: [],
-      urlBase: `https://support.infocaption.com/API/lucene/guidesearch?searchable=y&hitsPerPage=15&page=`,
+      urlBase: `https://support.infocaption.com/API/lucene/guidesearch?searchable=y&hitsPerPage=5&page=`,
       urlSearch: "&searchQuery=",
 
       pageNr: 1,
@@ -88,16 +95,27 @@ export default {
       totPagesArr: [],
       searchPagesInit: 0,
       currentPagingArray: [],
+      imgadress:'https://support.infocaption.com/', 
+     
     };
   },
 
   methods: {
+
+    onPageChange(page) {
+      console.log(page)
+      this.currentPage = page;
+    },
     SearchInput() {
       console.log(document.getElementById("search-input").value);
       this.searchQuery = document.getElementById("search-input").value;
     },
 
-    Search() {
+
+
+    Search(event) {
+console.log(event)
+
       this.searchResults = [];
       this.pageString = this.pageNr.toString();
       fetch(this.urlBase + this.pageString + this.urlSearch + this.searchQuery)
@@ -119,7 +137,6 @@ export default {
       }, 200);
 
 
-      this.currentPagingArray = [ ...new Set(this.currentPagingArray) ]
 
     },
 
@@ -132,15 +149,25 @@ export default {
         });
       }
 
+
+      if (this.totPagesArr.length > 5) {
+
+
       this.currentPagingArray = [];
 
       this.currentPagingArray.push(
         this.totPagesArr.splice(this.pageNr, this.pageNr + 5)
-      );
+      );}
+
+    else{this.currentPagingArray.push(
+        this.totPagesArr)}
+
+
+
 
       console.log(this.totPagesArr);
 
-      return this.totPagesArr;
+      return this.currentPagingArray;
     },
 
     PageTurner(direction) {
@@ -163,9 +190,6 @@ export default {
       }
 
      
-      //   if (direction == 0){ this.pageNr--}
-
-      //  if (direction == 1){ this.pageNr++}
     },
   },
 };
@@ -214,6 +238,10 @@ a {
   color: #42b983;
 }
 
+img{
+  width: 100%;
+}
+
 #search-main {
   display: flex;
   flex-direction: column;
@@ -222,13 +250,22 @@ a {
   background-color: whitesmoke;
 }
 
+#search-results{
+
+    display: flex;
+flex-flow: wrap;
+
+}
+
 .search-item {
   margin: 1rem;
   padding: 1rem;
   border: 1px solid rgba(200, 200, 200, 0.5);
   border-radius: 5px;
-word-break: break-all;
   background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .search-item .author-field {
@@ -246,11 +283,26 @@ word-break: break-all;
   font-size: 0.6rem;
 }
 
-.date-field {
+
+
+.search-item .date-field {
   padding: 0.5rem;
   font-size: 1rem;
   color: grey;
 }
+
+.search-item-footer{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.search-item-footer i{
+  font-size: 1.5rem;
+  color:blanchedalmond
+}
+
 
 .pagination {
   display: flex;
@@ -284,7 +336,8 @@ word-break: break-all;
   padding: 0.5rem;
 }
 
-/* #search-input{
-  padding: 0.5rem;
-} */
+
+
+
+
 </style>
