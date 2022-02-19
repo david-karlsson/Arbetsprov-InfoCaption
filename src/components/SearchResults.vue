@@ -185,14 +185,19 @@ console.log(i)
 
       this.currentPagingArray = [];
 
-      this.currentPagingArray.push(
-        this.totPagesArr.splice(this.pageNr, this.pageNr + 5)
-      );}
+      this.currentPagingArray= this.totPagesArr.splice(this.pageNr, this.pageNr + 5) ;}
 
     else{this.currentPagingArray.push(
         this.totPagesArr)}
 
+ if (this.currentPagingArray.length > 5) {
 
+   
+   var tempPages = this.currentPagingArray.splice(this.pageNr, this.pageNr + 5)
+   this.currentPagingArray = []
+   this.currentPagingArray.push(tempPages)
+
+ }
 
 
       console.log(this.totPagesArr);
