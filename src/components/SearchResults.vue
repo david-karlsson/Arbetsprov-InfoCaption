@@ -251,6 +251,11 @@ header .ui.category.search input,
 #search-main button {
   margin: 1rem 0.2rem;
 }
+.ui.button , #search-main button {
+ background-color: rgb(255, 250, 245);}
+
+
+
 .ui.category.search{
 display:flex;
 flex-direction: column;
@@ -345,11 +350,10 @@ margin: 0.4rem;
 }
 
 .pagination button {
-  color: aliceblue;
-  border: 2px double burlywood;
-  background-color: brown;
+  border: 2px solid blanchedalmond;
+   background-color: rgb(255, 250, 245);
 
-  padding: 0.5rem 0.7rem;
+  padding: 1rem ;
   cursor: pointer;
 }
 
