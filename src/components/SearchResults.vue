@@ -43,7 +43,7 @@
         </footer>
          <span class="author-field">
           <p>{{ item.FirstLastName }}</p>
-          <p>(<a :href="email">{{ item.authorEmail }}</a>) </p>
+          <p><a :href="email">{{ item.authorEmail }}</a> </p>
         </span>
       </li>
     </ul>
@@ -311,7 +311,7 @@ flex-flow: wrap;
 .search-item .author-field {
   display: flex;
 
-  align-items: flex-start;
+
 flex-direction: column;
    background-color: rgb(255, 250, 245);
 padding: 1rem;
