@@ -292,7 +292,7 @@ flex-flow: wrap;
 
 }
 
-.search-item {
+.ui.card.search-item {
   margin: 1rem;
   padding: 1rem;
   border: 1px solid rgba(200, 200, 200, 0.5);
