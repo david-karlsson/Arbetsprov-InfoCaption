@@ -182,8 +182,21 @@ console.log(i)
       }
 
 
-      this.currentPagingArray[0]= [1,2,3,4,5] 
-      
+        if(this.totPagesArr.length > 4){
+
+             this.currentPagingArray[0]= [1,2,3,4,5]
+
+        }
+
+  
+   
+  if (this.totPagesArr.length < 5) {
+   
+ this.currentPagingArray = this.totPagesArr
+  }
+
+console.log(this.totPagesArr )
+
       },
 
 
@@ -288,6 +301,7 @@ flex-flow: wrap;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  min-height: 70vh;
 }
 
 .search-item .author-field {
@@ -357,6 +371,7 @@ margin: 0.4rem;
   letter-spacing: 1.5px;
   line-height: 2;
   padding: 0.5rem;
+  word-break: break-all;
 }
 
 
