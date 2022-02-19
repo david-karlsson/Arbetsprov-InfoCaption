@@ -17,7 +17,7 @@
 </div>
 
 </header>
-  <section id="search-main" class="ui segment">
+  <section id="search-main" class="ui segment" v-if="searchPagesInit === 1">
 
  
 
@@ -49,7 +49,7 @@
     </ul>
     <footer id="pagination-footer" class="container">
       <button class="ui button" @click="(event) => {PageTurner(0),Search()}">  <i class="left chevron icon divider"></i></button>
-      <span class="pagination">
+      <span  class="pagination">
         <div v-for="item in currentPagingArray[0]" :key="item">
           <button  :id="item" :value="item" class="ui button" @click="SearchPageSelect(item), PaginationList()">
             {{ item }}
@@ -163,7 +163,7 @@ console.log(i)
           //  console.log(this.totalPages)
         });
 
-      this.searchPagesInit = 1;
+  
       setTimeout(() => {
         this.PaginationList();
       }, 200);
