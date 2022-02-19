@@ -182,30 +182,12 @@ console.log(i)
       }
 
 
-      if (this.totPagesArr.length > 5) {
+      this.currentPagingArray[0]= [1,2,3,4,5] 
+      
+      },
 
 
-      this.currentPagingArray = [];
-
-      this.currentPagingArray= this.totPagesArr.splice(this.pageNr, this.pageNr + 5) ;}
-
-    else{this.currentPagingArray.push(
-        this.totPagesArr)}
-
- if (this.currentPagingArray.length > 5) {
-
-   
-   var tempPages = this.currentPagingArray.splice(this.pageNr, this.pageNr + 5)
-   this.currentPagingArray = []
-   this.currentPagingArray.push(tempPages)
-
- }
-
-
-      console.log(this.totPagesArr);
-
-      return this.currentPagingArray;
-    },
+  
 
     PageTurner(direction) {
 
