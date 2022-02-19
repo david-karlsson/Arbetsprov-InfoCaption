@@ -49,10 +49,13 @@
       <button class="ui button" @click="(event) => {PageTurner(0),Search()}">  <i class="left chevron icon divider"></i></button>
       <span class="pagination">
         <div v-for="item in currentPagingArray[0]" :key="item">
-          <button  :id="item" :value="item" class="ui button" @click="Search(), PaginationList()">
+          <button  :id="item" :value="item" class="ui button" @click="SearchPageSelect(item), PaginationList()">
             {{ item }}
+            
           </button>
         </div>
+   
+
       </span>
       <button class="ui button" @click="PageTurner(1), Search()"><i class="right chevron icon divider"></i></button>
 
@@ -111,14 +114,41 @@ export default {
       this.searchQuery = document.getElementById("search-input").value;
     },
 
+ Search() {
 
 
-    Search(event) {
-console.log(event)
 
       this.searchResults = [];
       this.pageString = this.pageNr.toString();
-      fetch(this.urlBase + this.pageString + this.urlSearch + this.searchQuery)
+      fetch(this.urlBase + this.pageString+ this.urlSearch + this.searchQuery)
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          this.pageNr = res.currentPage;
+          this.searchResults.unshift(res.results);
+
+          this.totalPages = res.totalPages;
+          //  console.log(res)
+          //  console.log(this.totalPages)
+        });
+
+      this.searchPagesInit = 1;
+      setTimeout(() => {
+        this.PaginationList();
+      }, 200);
+
+
+
+    },
+
+    SearchPageSelect(i) {
+console.log(i)
+
+
+      this.searchResults = [];
+      this.pageString = i.toString();
+      fetch(this.urlBase + this.pageString+ this.urlSearch + this.searchQuery)
         .then((res) => {
           return res.json();
         })
