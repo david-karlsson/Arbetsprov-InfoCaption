@@ -300,7 +300,7 @@ flex-flow: wrap;
   background-color: #fefefe;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+
   min-height: 70vh;
 }
 
