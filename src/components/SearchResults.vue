@@ -310,9 +310,11 @@ flex-flow: wrap;
 
   align-items: flex-start;
 flex-direction: column;
- 
+   background-color: rgb(255, 250, 245);
+padding: 1rem;
   color: grey;
   margin: 0.5rem;
+  border-radius: 5px;
 }
 
 .search-item .author-field p{
