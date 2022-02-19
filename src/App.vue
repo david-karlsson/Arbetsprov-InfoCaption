@@ -51,6 +51,6 @@ padding-top: 5rem;
   flex-direction: column;
   align-items: center;
    background-color: rgb(255, 249, 243);
-
+  height: 100vh;
 }
 </style>

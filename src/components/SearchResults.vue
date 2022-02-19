@@ -287,6 +287,7 @@ img{
 
   align-items: center;
   background-color: whitesmoke;
+
 }
 
 #search-results{
