@@ -23,10 +23,7 @@
 
     <ul  id="search-results">
       <li v-for="item in searchResults[0]" :key="item.id"  class="search-item ui card">
-        <span class="author-field">
-          <p>{{ item.FirstLastName }}</p>
-          <p>({{ item.authorEmail }})</p>
-        </span>
+       
 
         <h2>{{ item.name }}</h2>
         <span>
@@ -38,11 +35,16 @@
         </span>
 
         <footer class="search-item-footer">
+          
           <p class="date-field">
             <small> {{ item.publicationDate }}</small>
           </p>
          <a :href=item.fullURL><i class="share alternate icon"></i></a> 
         </footer>
+         <span class="author-field">
+          <p>{{ item.FirstLastName }}</p>
+          <p>(<a :href="email">{{ item.authorEmail }}</a>) </p>
+        </span>
       </li>
     </ul>
     <footer id="pagination-footer" class="container">
@@ -91,7 +93,7 @@ export default {
       searchResults: [],
       urlBase: `https://support.infocaption.com/API/lucene/guidesearch?searchable=y&hitsPerPage=5&page=`,
       urlSearch: "&searchQuery=",
-
+      email:'mailto:item.authorEmail',
       pageNr: 1,
       pageString: "1",
       totalPages: 0,
@@ -307,14 +309,14 @@ flex-flow: wrap;
   display: flex;
 
   align-items: flex-start;
-
+flex-direction: column;
  
   color: grey;
   margin: 0.5rem;
 }
 
 .search-item .author-field p{
-
+margin: 0.4rem;
   font-size: 0.6rem;
 }
 
