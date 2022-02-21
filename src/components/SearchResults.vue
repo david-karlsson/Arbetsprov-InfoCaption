@@ -272,6 +272,8 @@ img {
 #search-results {
   display: flex;
   flex-flow: wrap;
+    padding: 1rem;
+
 }
 
 .ui.card.search-item {
@@ -281,7 +283,7 @@ img {
   border-radius: 5px;
   background-color: #fefefe;
   display: grid;
-  flex-direction: column;
+
   grid-template-rows: 3fr 1fr;
   min-height: 70vh;
 }
@@ -342,13 +344,16 @@ img {
   cursor: pointer;
 }
 
-.topics {
-  color: rgb(66, 15, 15);
+#search-results .search-item .topics {
+  color: rgb(114, 98, 98);
   display: flex;
   flex-direction: column;
   letter-spacing: 1.5px;
+  font-size:0.7rem;
   line-height: 2;
   padding: 0.5rem;
   word-break: break-all;
+  background: #fffbfb;
+  margin: 1rem;
 }
 </style>
